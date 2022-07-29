@@ -1,10 +1,10 @@
 
-const imgList = document.querySelectorAll(".item__img-inner")
-const btnList = document.querySelectorAll(".item__link")
+const imgList = document.getElementsByClassName("item__img-inner")
+const btnList = document.getElementsByClassName("item__link")
 
-for (var b = 0; b < btnList.length; b++)
+for (let b = 0; b < btnList.length; b++)
 {
-    btnList[b].addEventListener('mouseenter', (e) => {
+    btnList[b].addEventListener('mouseenter', () => {
         gsap.killTweensOf(imgList[b])
         gsap.to(imgList[b], {
             duration: 2,
@@ -13,7 +13,7 @@ for (var b = 0; b < btnList.length; b++)
         })
     })
 
-    btnList[b].addEventListener('mouseleave', (e) => {
+    btnList[b].addEventListener('mouseleave', () => {
         gsap.killTweensOf(imgList[b])
         gsap.to(imgList[b], {
             duration: 0.7,

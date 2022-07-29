@@ -7,8 +7,7 @@
     <link rel="stylesheet" href="https://use.typekit.net/ont3ybf.css">
 	<link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="favicon.ico">
-	<script src="index.js"></script> 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+	
     <title>Backstage - Panji Across SEA</title>
 </head>
 <body class="titlepage loading">
@@ -48,6 +47,32 @@
             </div>
         </div>
     </main>
-	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+	<script>
+		const imgList = document.querySelectorAll(".item__img-inner")
+		const btnList = document.querySelectorAll(".item__link")
+
+for (var b = 0; b < btnList.length; b++)
+{
+    btnList[b].addEventListener('mouseenter', (e) => {
+        gsap.killTweensOf(imgList[b])
+        gsap.to(imgList[b], {
+            duration: 2,
+            ease: 'power4',
+            scale: 1.5
+        })
+    })
+
+    btnList[b].addEventListener('mouseleave', (e) => {
+        gsap.killTweensOf(imgList[b])
+        gsap.to(imgList[b], {
+            duration: 0.7,
+            ease: 'expo',
+            scale: 1
+        })
+    })
+
+}
+	</script>
 </body>
 </html>

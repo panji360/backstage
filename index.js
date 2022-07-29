@@ -1,3 +1,4 @@
+
 const imgList = document.querySelectorAll(".item__img-inner")
 const btnList = document.querySelectorAll(".item__link")
 

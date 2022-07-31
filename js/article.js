@@ -1,14 +1,5 @@
 const openButton = document.getElementById("content_link-1")
 
-const overlayArticle = new TimelineMax({paused: true})
-overlayArticle.to(".overlay", 1, {top:"-10%", ease: Power3.easeInOut})
-
-/*
-// Close open
-function click() {
-    //overlayArticle.reversed() ? overlayArticle.play() : overlayArticle.reverse();  
-}
-*/
 
 const picAnim = document.getElementById("img1")
 
@@ -32,69 +23,18 @@ openButton.addEventListener('mouseleave', () => {
 
 openButton.addEventListener('click', click)
 
-
-var modalOverlay = document.querySelector(".modalOverlay");
-var modal = document.querySelector(".messageWrapper");
-
-TweenMax.set([modalOverlay, modal], { autoAlpha: 0 });
-
+const articleView = document.getElementById("article1")
+const body = document.getElementsByTagName("BODY")[0]; 
 
 function click() {
-    var newRect = getPosition(modal, openButton);
-
-  TweenMax.set(modal, {
-    x: newRect.left,
-    y: newRect.top,
-    width: newRect.width,
-    height: newRect.height
-  });
-
-  var tl = new TimelineMax();
-
-  tl.to(modalOverlay, 0.5, { autoAlpha: 0.75 });
-  tl.to(modal, 0.5, {
-    x: 0,
-    y: 0,
-    width: 800,
-    height: 400,
-    autoAlpha: 1
-  });
-
-  document.querySelector(".message").innerHTML = "Modal Content Here";
+    articleView.style.display = "block"
+    body.style.overflow = "hidden" //hide the scrollbar on original body to prevent double scrolls
 }
 
-modalOverlay.addEventListener("click", function() {
-  var newRect = getPosition(modal, openButton);
-  var tl = new TimelineMax();
+var span = document.getElementsByClassName("close")[0]
 
-  tl.to(modal, 0.5, {
-    autoAlpha: 0,
-    x: newRect.left,
-    y: newRect.top,
-    height: newRect.height,
-    width: newRect.width
-  });
-  tl.to(".modalOverlay", 0.5, { autoAlpha: 0 });
-});
-
-
-
-function getPosition(elem, target) {
-  var targetRect = target.getBoundingClientRect();
-  var elemRect = elem.getBoundingClientRect();
-
-  TweenLite.set(elem, {
-    x: 0,
-    y: 0,
-    width: targetRect.width,
-    height: targetRect.height
-  });
-  var newRect = elem.getBoundingClientRect();
-  TweenLite.set(elem, { width: elemRect.width, height: elemRect.height });
-  return {
-    left: targetRect.left - newRect.left,
-    top: targetRect.top - newRect.top,
-    width: newRect.width,
-    height: newRect.height
-  };
-}
+span.onclick = function() {
+    articleView.style.display = "none"
+    body.style.overflow = "auto"
+  }
+  

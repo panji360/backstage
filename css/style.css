@@ -29,41 +29,6 @@ html {
   }
 
 
-/* Page Loader */
-.js .loading::before,
-.js .loading::after {
-	content: '';
-	position: fixed;
-	z-index: 1000;
-}
-
-.js .loading::before {
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: var(--color-bg);
-}
-
-.js .loading::after {
-	top: 50%;
-	left: 50%;
-	width: 60px;
-	height: 60px;
-	margin: -30px 0 0 -30px;
-	border-radius: 50%;
-	opacity: 0.4;
-	background: var(--color-link);
-	animation: loaderAnim 0.7s linear infinite alternate forwards;
-
-}
-
-@keyframes loaderAnim {
-	to {
-		opacity: 1;
-		transform: scale3d(0.5,0.5,1);
-	}
-}
 
 a {
 	text-decoration: none;
@@ -98,15 +63,10 @@ a:focus-visible {
 	background: transparent;
 }
 
-:target {
-	display: block;
-	position: relative;
-	padding-top: 14.2vh; 
-  }
 
 .frame {
 	position: fixed;
-	z-index: 1000;
+	z-index: 1;
 	top: 0;
 	left: 0;
 	display: grid;
@@ -163,6 +123,12 @@ a:focus-visible {
     
 }
 
+.item__box :target {
+	display: block;
+	position: relative;
+	padding-top: 14.2vh; 
+}
+  
 .item {
 	margin-bottom: 5rem;
 	display: grid;
@@ -263,10 +229,10 @@ a:focus-visible {
 
 .preview__desc {
 	margin-top: 2rem;
-	line-height: 1.2;
+	line-height: 1.5;
     font-family: acumin-pro, sans-serif;
-    font-size: 1rem;
-	font-weight: 350;
+    font-size: 0.9rem;
+	font-weight: 300;
 	text-align: justify;
 }
 
@@ -276,8 +242,8 @@ a:focus-visible {
 	text-decoration: underline;
 	font-weight: 500;
 	width: 20vw;
+	cursor: pointer;
 }
-
 
 .button__back {
 	background: none;
@@ -299,129 +265,127 @@ a:focus-visible {
 }
 
 .article {
+	display: none;
 	position: fixed;
-	top: 0;
-	right: 0;
-	width: 100%;
-	height: 100vh;
 	z-index: 2000;
-	pointer-events: none;
-}
-
-.article .heading {
-	margin-bottom: 5rem;
-	font-size: 10vw;
-    font-size: clamp(2rem, 10vw, 6rem);
-}
-
-.article .heading > span:first-child {
-	font-size: 14vw;
-	font-size: clamp(2rem, 14vw, 10rem);
-}
-
-.article__content {
-	height: 0;
-	overflow: hidden;
-}
-
-.article__content--open {
-	pointer-events: auto;
-	padding: 0 0 20vh;
+	left: 0;
+	top: 0;
+	width: 100%;
 	height: 100%;
-	overflow-y: scroll;
-}
-
-.article__content .heading {
-	text-align: center;
-}
-
+	overflow: auto;
+	-webkit-animation-name: fadeIn;
+	-webkit-animation-duration: 1s;
+	animation-name: fadeIn;
+	animation-duration: 1s
+  }
+  
+.article__content {
+	position: fixed;
+	background-color: var(--color-bg-alt);
+	height: 100%;
+	width: 100%;
+	-webkit-animation-name: slideIn;
+	-webkit-animation-duration: 1s;
+	animation-name: slideIn;
+	animation-duration: 1s;
+	padding: 0 0 20vh;
+	margin-left: auto;
+	margin-right: auto;
+	overflow: auto;
+  }
+    
 .article__text {
 	padding: 0 1rem;
-	line-height: 1.2;
+	line-height: 1.4;
 	margin: 0 auto;
-	max-width: 65ch;
+	max-width: 65vw;
 	will-change: transform;
-}
+	text-transform: none;
+	text-align: justify;
+  }
+
+.article__text h2 {
+	margin-top: 10vh;
+	font-size: 3vw;
+	font-size: clamp(2rem, 3vw, 3rem);
+	text-align: center;
+	text-transform: none;
+	font-weight: 400;
+  }
 
 .article__text p {
 	margin: 1.5rem 0;
-}
-
-.article__text img {
-	max-width: 50%;
-	margin: 5rem auto;
+	font-weight: 300;
+	text-indent: 2rem;
+	font-family: acumin-pro, sans-serif;
+  }
+  
+.article__text figure {
+	width: 60%;
+	margin: auto;
 	display: block;
-	border-radius: 50%;
 }
 
-.article__back {
-	position: absolute;
-	top: 2rem;
-	left: 2rem;
-	opacity: 0;
-	cursor: pointer;
+.article__text figure img {
+	border-radius: 2%;
+	max-width: 100%;
 }
 
-.article__content--open ~ .article__back {
-	pointer-events: auto;
+.article__text figure figcaption {
+	font-size: smaller;
+	font-family: acumin-pro, sans-serif;
+	font-weight: 300;
 }
 
-.overlay{
-	position: absolute;
-	z-index:100;
-	width:100%;
-	height: 100%;
-	background-color:#333;
-	top:-110%;
+.article__text sup {
+	vertical-align: super;
+    font-size: smaller;
   }
 
+.article__text .footnote {
+	font-size: smaller;
+	text-align: left;
+	margin: 0.5em 0;
+	text-indent: 0;
+}
+  
+  
+@-webkit-keyframes slideIn {
+  from {bottom: -50%; opacity: 0} 
+  to {bottom: 0; opacity: 1}
+}
+
+@keyframes slideIn {
+  from {bottom: -50%; opacity: 0}
+  to {bottom: 0; opacity: 1}
+}
+
+@-webkit-keyframes fadeIn {
+  from {bottom: 0} 
+  to {bottom: 1}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0} 
+  to {opacity: 1}
+}
 
 
-  .modalOverlay {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: #000000;
-	text-align: center;
-	z-index: 11;
-	cursor: pointer;
-	opacity: 0;
-  }
-  
-  .modalContainer {
-	display: flex;
-	justify-content: center;
-	height: 100%;
-	width: 100%;
-  }
-  
-  .messageWrapper {
-	display: flex;
-	justify-content: center;
-	align-content: center;
-	align-items: center;
-	width: 800px;
-	height: 400px;
-	background-color: #ffffff;
-	position: absolute;
-	z-index: 12;
-	opacity: 0;
-  }
-  
-  .message {
-	display: flex;
-	justify-content: center;
-	align-content: center;
-	align-items: center;
-	font-weight: 700;
-	font-family: "Roboto", sans-serif;
-	font-size: 18px;
-	color: #000;
-	position: relative;
-  }
-  
+.close {
+  color: var(--color-link);
+  float: right;
+  padding: 1rem 4rem;
+  font-size: 4rem;
+}
+
+.close:hover,
+.close:focus {
+  color: var(--color-link-hover);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
 
 @media screen and (min-width: 53em) {
 	.menu {
@@ -429,6 +393,7 @@ a:focus-visible {
 		margin-top: 1fr;
 		width: 100%;
 	}
+	
 	.frame {
 		height: 100vh;
 		grid-template-columns: auto 1fr;
